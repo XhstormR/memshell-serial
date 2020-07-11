@@ -19,5 +19,13 @@
     public static void main(java.lang.String[]);
 }
 
+-keepclasseswithmembers class org.apache.commons.** {
+    <fields>;
+}
+
+-keepclasseswithmembers class com.xhstormr.app.FilterImpl
+
 -dontwarn javax.**
 -dontwarn org.apache.catalina.**
+
+-printmapping ../build/mapping.txt

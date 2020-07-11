@@ -27,7 +27,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("org.apache.tomcat.embed:tomcat-embed-core:9.+")
+    compileOnly("org.apache.tomcat.embed:tomcat-embed-core:9.+")
 
     implementation("org.apache.commons:commons-collections4:4.0")
 }
