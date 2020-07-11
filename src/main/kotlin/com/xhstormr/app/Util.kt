@@ -21,12 +21,8 @@ fun getSystemResourceAsStream(name: String): InputStream =
 fun String.toHexString(charset: Charset) = this.toByteArray(charset)
     .joinToString("""\x""", """\x""") { "%02x".format(it) }
 
-fun Class<*>.asFile(suffix: Boolean = true): String {
-    var path = if (enclosingClass == null) name.replace('.', '/')
-    else enclosingClass.asFile(false) + "$" + simpleName
-    if (suffix) path += ".class"
-    return path
-}
+fun Class<*>.asFile() =
+    name.replace('.', '/') + ".class"
 
 fun Class<*>.asByte() =
     getSystemResourceAsStream(this.asFile()).readBytes()

@@ -23,7 +23,9 @@
     <fields>;
 }
 
--keepclasseswithmembers class com.xhstormr.app.FilterImpl
+-keepclasseswithmembers class com.xhstormr.app.FilterImpl {
+    <methods>;
+}
 
 -dontwarn javax.**
 -dontwarn org.apache.catalina.**

