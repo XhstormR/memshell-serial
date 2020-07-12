@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+    <headerType>console</headerType>
+    <jar>../build/libs/memshell-serial-1.0-SNAPSHOT-min.jar</jar>
+    <outfile>../build/bin/memshell-serial.exe</outfile>
+    <icon>icon.ico</icon>
+    <chdir>.</chdir>
+    <errTitle>memshell-serial</errTitle>
+    <versionInfo>
+        <fileVersion>1.0.0.0</fileVersion>
+        <txtFileVersion>1.0.0</txtFileVersion>
+        <productVersion>1.0.0.0</productVersion>
+        <txtProductVersion>1.0.0</txtProductVersion>
+        <companyName>XhstormR</companyName>
+        <copyright>memshell-serial (C) 2020 XhstormR</copyright>
+        <internalName>memshell-serial</internalName>
+        <productName>memshell-serial</productName>
+        <fileDescription>memshell-serial</fileDescription>
+        <originalFilename>memshell-serial.exe</originalFilename>
+        <language>ENGLISH_US</language>
+    </versionInfo>
+    <jre>
+        <path>%JAVA_HOME%</path>
+        <minVersion>1.8.0</minVersion>
+    </jre>
+</launch4jConfig>

@@ -27,12 +27,22 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
+    implementation("com.github.ajalt:clikt:+")
+
     compileOnly("org.apache.tomcat.embed:tomcat-embed-core:9.+")
 
     implementation("org.apache.commons:commons-collections4:4.0")
 }
 
 tasks {
+    val exe by creating(JavaExec::class) {
+        buildDir.resolve("bin").mkdirs()
+        val launch4jJar = "${ext["launch4j_home"]}/launch4j.jar"
+        val launch4jCfg = "$rootDir/assets/config.xml"
+        classpath = files(launch4jJar)
+        args = listOf(launch4jCfg)
+    }
+
     val proguard by creating(ProGuardTask::class) {
         val file = jar.get().archiveFile.get().asFile
         injars(file)
@@ -78,4 +88,5 @@ tasks {
     }
 
     proguard.dependsOn(jar)
+    exe.dependsOn(proguard)
 }

