@@ -10,7 +10,7 @@ import java.util.Base64
 
 object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
-    private val payload by option().enum<Payload>().required()
+    private val payload by option(help = "Password: xhstormr").enum<Payload>().required()
 
     override fun run() {
         // exploit(CommonsCollections2ObjectPayload, clazz<TemplatesImplPayload1>())

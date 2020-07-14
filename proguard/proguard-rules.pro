@@ -23,7 +23,7 @@
     <fields>;
 }
 
--keepclasseswithmembers class com.xhstormr.app.FilterImpl* {
+-keepclasseswithmembers class com.xhstormr.app.*Filter {
     <methods>;
 }
 
