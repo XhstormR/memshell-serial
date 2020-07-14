@@ -15,11 +15,15 @@
     public static **[] values();
 }
 
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+}
+
 -keepclasseswithmembers class * {
     public static void main(java.lang.String[]);
 }
 
--keepclasseswithmembers class org.apache.commons.** {
+-keepclasseswithmembernames class org.apache.commons.** {
     <fields>;
 }
 
@@ -30,4 +34,5 @@
 -dontwarn javax.**
 -dontwarn org.apache.catalina.**
 
+-printusage ../build/usage.txt
 -printmapping ../build/mapping.txt
