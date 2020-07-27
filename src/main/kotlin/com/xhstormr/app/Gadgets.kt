@@ -25,7 +25,5 @@ object Gadgets {
     }
 
     // required to make TemplatesImpl happy
-    object Foo : Serializable {
-        private const val serialVersionUID = 8207363842866235160L
-    }
+    class Foo : Serializable
 }
