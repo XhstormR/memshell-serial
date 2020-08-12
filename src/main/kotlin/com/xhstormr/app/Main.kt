@@ -12,7 +12,7 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
     private val chain by option().enum<Chain>().required()
 
-    private val payload by option(help = "Password: xhstormr").enum<Payload>().required()
+    private val payload by option(help = "Password: 34aa503f95bb").enum<Payload>().required()
 
     override fun run() {
         // exploit(Chain.CommonsCollections2Chain, clazz<TomcatShellFilterTemplatesImpl>())
