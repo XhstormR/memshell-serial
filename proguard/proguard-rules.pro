@@ -27,12 +27,14 @@
     <fields>;
 }
 
+-keep class org.apache.commons.logging.** { *; }
+
 -keepclasseswithmembers class com.xhstormr.app.*Filter {
     <methods>;
 }
 
 -dontwarn javax.**
--dontwarn org.apache.catalina.**
+-dontwarn org.apache.**
 
 -printusage ../build/usage.txt
 -printmapping ../build/mapping.txt

@@ -12,7 +12,7 @@ buildscript {
 plugins {
     idea
     application
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.0"
     id("org.jlleitschuh.gradle.ktlint") version "9.3.0"
 }
 
@@ -32,6 +32,8 @@ dependencies {
     compileOnly("org.apache.tomcat.embed:tomcat-embed-core:9.+")
 
     implementation("org.apache.commons:commons-collections4:4.0")
+
+    implementation("commons-beanutils:commons-beanutils:1.9.2")
 }
 
 tasks {
@@ -64,7 +66,7 @@ tasks {
     }
 
     withType<Wrapper> {
-        gradleVersion = "6.5"
+        gradleVersion = "6.6"
         distributionType = Wrapper.DistributionType.ALL
     }
 
